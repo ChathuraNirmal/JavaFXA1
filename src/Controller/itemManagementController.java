@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -16,10 +17,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class itemManagementController {
+public class itemManagementController implements Initializable {
 
 
     public Label lblId;
@@ -47,6 +50,9 @@ public class itemManagementController {
 
     private void add(){
 
+        txtPrice.setPromptText("");
+        txtQty.setPromptText("");
+
         int qty = 0;
         double price = 0;
 
@@ -68,9 +74,15 @@ public class itemManagementController {
         }
 
 
-            list.add(new itemManagementModel(list.size()+"",txtName.getText(),qty,Double.parseDouble(txtPrice.getText()),txtItemDescription.getText()));
+        list.add(new itemManagementModel(list.size()+"",txtName.getText(),qty,Double.parseDouble(txtPrice.getText()),txtItemDescription.getText()));
 
             loadTable();
+
+            lblId.setText(list.size()+"");
+            txtName.setText("");
+            txtQty.setText("");
+            txtPrice.setText("");
+            txtItemDescription.setText("");
 
 
 }
@@ -111,4 +123,8 @@ public class itemManagementController {
 
         }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        lblId.setText(list.size()+"");
+    }
 }
